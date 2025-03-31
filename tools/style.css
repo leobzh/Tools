@@ -1,0 +1,642 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
+
+/* Replace the :root variables at the top with these new colors */
+:root {
+  --bg-color: #0a0808;
+  --bg-secondary: #120a0a;
+  --bg-tertiary: #1a0d0d;
+  --text-primary: #ffe0e0;
+  --text-secondary: #ba8a8a;
+  --accent-primary: #ff0000;
+  --accent-secondary: #cc0000;
+  --accent-tertiary: #aa0000;
+  --border-color: #422a2a;
+  --success-color: #ff3300;
+  --error-color: #ff0033;
+  --warning-color: #ff6600;
+  --glow-color: rgba(255, 0, 0, 0.6);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Add these new styles before the body selector */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 0, 0, 0.02), rgba(255, 0, 0, 0.06));
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 101;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(to bottom, rgba(255, 0, 0, 0) 0%, rgba(255, 0, 0, 0.2) 10%, rgba(255, 0, 0, 0.2) 100%);
+  opacity: 0.1;
+  z-index: 102;
+  pointer-events: none;
+  animation: scanline 8s linear infinite;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+/* Add a demonic symbol to the background */
+.container::before {
+  content: "悪";
+  position: fixed;
+  font-size: 40vw;
+  color: rgba(255, 0, 0, 0.03);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Header Styles */
+/* Modify the header style */
+header {
+  border-bottom: 2px solid var(--accent-primary);
+  box-shadow: 0 0 15px var(--glow-color);
+  position: relative;
+  overflow: hidden;
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+  animation: slide 3s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-bottom: 2px solid var(--accent-primary);
+  box-shadow: 0 0 10px rgba(0, 255, 170, 0.2);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Modify the oni-mask style */
+.oni-mask {
+  font-size: 2.5rem;
+  color: var(--accent-primary);
+  text-shadow: 0 0 10px var(--accent-primary);
+  animation: pulse 4s infinite alternate, glitch 3s infinite alternate;
+  position: relative;
+}
+
+.oni-mask::before {
+  content: "鬼";
+  position: absolute;
+  left: 0.05em;
+  text-shadow: none;
+  color: rgba(255, 0, 0, 0.7);
+  animation: glitch 2.5s infinite alternate-reverse;
+}
+
+@keyframes pulse {
+  0% {
+    text-shadow: 0 0 5px var(--accent-primary);
+  }
+  100% {
+    text-shadow: 0 0 20px var(--accent-primary), 0 0 30px var(--accent-primary);
+  }
+}
+
+/* Add these new styles after the existing @keyframes pulse */
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 255, 0.75), -0.025em 0.05em 0
+      rgba(0, 255, 0, 0.75);
+  }
+  14% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 255, 0.75), -0.025em 0.05em 0
+      rgba(0, 255, 0, 0.75);
+  }
+  15% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 255, 0.75), -0.05em -0.05em 0
+      rgba(0, 255, 0, 0.75);
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 255, 0.75), -0.05em -0.05em 0
+      rgba(0, 255, 0, 0.75);
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 255, 0.75), 0 -0.05em 0
+      rgba(0, 255, 0, 0.75);
+  }
+  99% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 255, 0.75), 0 -0.05em 0
+      rgba(0, 255, 0, 0.75);
+  }
+  100% {
+    text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 255, 0.75), -0.025em -0.05em 0
+      rgba(0, 255, 0, 0.75);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  19.999%,
+  22%,
+  62.999%,
+  64%,
+  64.999%,
+  70%,
+  100% {
+    opacity: 0.99;
+  }
+  20%,
+  21.999%,
+  63%,
+  63.999%,
+  65%,
+  69.999% {
+    opacity: 0.4;
+  }
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent-primary);
+}
+
+h1 span {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+}
+
+.system-info {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.online {
+  color: var(--success-color);
+}
+
+/* Main Content */
+main {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+.section-title {
+  font-size: 0.7rem;
+  color: var(--accent-secondary);
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.3rem;
+}
+
+.script-list,
+.tool-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.script-list li,
+.tool-list li {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+}
+
+.script-list li:hover,
+.tool-list li:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-left: 2px solid var(--accent-secondary);
+}
+
+/* Modify the script-list li.active style */
+.script-list li.active {
+  background-color: var(--bg-tertiary);
+  color: var(--accent-primary);
+  border-left: 2px solid var(--accent-primary);
+  text-shadow: 0 0 5px var(--accent-primary);
+  position: relative;
+}
+
+.script-list li.active::after {
+  content: "悪";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: var(--accent-primary);
+  opacity: 0.7;
+}
+
+/* Console Area */
+.console-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.2rem;
+}
+
+/* Modify the tab.active style */
+.tab.active {
+  background-color: var(--bg-tertiary);
+  color: var(--accent-primary);
+  border-top: 2px solid var(--accent-primary);
+  text-shadow: 0 0 5px var(--accent-primary);
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+/* Add blood drip effect to the console window */
+.console-window {
+  position: relative;
+}
+
+.console-window::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--accent-primary);
+  box-shadow: 0 0 10px var(--glow-color);
+  clip-path: polygon(
+    0% 0%,
+    5% 100%,
+    10% 30%,
+    15% 100%,
+    20% 70%,
+    25% 100%,
+    30% 40%,
+    35% 100%,
+    40% 60%,
+    45% 100%,
+    50% 30%,
+    55% 100%,
+    60% 70%,
+    65% 100%,
+    70% 40%,
+    75% 100%,
+    80% 60%,
+    85% 100%,
+    90% 30%,
+    95% 100%,
+    100% 0%
+  );
+}
+
+.console-window {
+  flex: 1;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1rem;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls button:hover {
+  color: var(--text-primary);
+}
+
+/* Modify the console-output style */
+.console-output {
+  background-color: rgba(10, 5, 5, 0.7);
+  text-shadow: 0 0 5px var(--text-primary);
+  position: relative;
+}
+
+.console-output::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+}
+
+.console-output {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.line {
+  margin-bottom: 0.5rem;
+  word-break: break-word;
+}
+
+.line.success {
+  color: var(--success-color);
+}
+
+.line.error {
+  color: var(--error-color);
+}
+
+.line.warning {
+  color: var(--warning-color);
+}
+
+.console-input-area {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+}
+
+.prompt {
+  color: var(--accent-primary);
+  margin-right: 0.5rem;
+}
+
+.console-input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+/* Script Info */
+.script-info {
+  height: 100px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.current-script,
+.script-stats {
+  display: flex;
+  flex-direction: column;
+}
+
+.script-name {
+  font-size: 1.2rem;
+  color: var(--accent-primary);
+  margin-top: 0.5rem;
+}
+
+.script-stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.stat-value {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+/* Footer */
+/* Add a pulsing effect to the status message */
+.status-message {
+  color: var(--success-color);
+  animation: pulse 4s infinite alternate;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  font-size: 0.8rem;
+}
+
+.system-stats {
+  display: flex;
+  gap: 1rem;
+  color: var(--text-secondary);
+}
+
+.system-stats .stat span {
+  color: var(--accent-secondary);
+}
+
+.status-message {
+  color: var(--success-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    max-height: 200px;
+  }
+
+  .script-info {
+    flex-direction: column;
+    height: auto;
+    gap: 1rem;
+  }
+
+  .script-stats {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* Glowing Effects */
+.console-window::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+  opacity: 0.5;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
