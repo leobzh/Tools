@@ -1,73 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oni Console - Script Manager</title>
+  <title>Samurai Console - Script Manager</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
 </head>
-<body>
+
+<body class="light-theme">
   <div class="scanline"></div>
   <div class="container">
     <header>
       <div class="logo">
-        <div class="oni-mask">鬼</div>
+        <div class="samurai-icon">侍</div>
         <div>
-          <h1>ONI<span>CONSOLE</span></h1>
-          <div class="subtitle">悪魔のシステム</div>
+          <h1>SAMURAI<span>CONSOLE</span></h1>
+          <div class="subtitle">Advanced Script Management</div>
         </div>
       </div>
       <div class="system-info">
-        <div class="status"><span class="pentagram">⛧</span> SYSTEM: <span class="online">ONLINE</span></div>
+        <div class="status">SYSTEM: <span class="online">ONLINE</span></div>
         <div class="time" id="current-time">00:00:00</div>
+        <button id="theme-toggle" class="theme-toggle">
+          <span class="light-icon">☀️</span>
+          <span class="dark-icon">🌙</span>
+        </button>
       </div>
     </header>
 
     <main>
       <div class="sidebar">
         <div class="section-title">SCRIPTS</div>
+        <div class="script-actions">
+          <button id="new-script" class="action-btn">New</button>
+          <button id="delete-script" class="action-btn">Delete</button>
+          <button id="refresh-scripts" class="action-btn">Refresh</button>
+        </div>
+        <div class="script-categories">
+          <button class="category-btn active" data-category="all">All</button>
+          <button class="category-btn" data-category="ai">AI</button>
+          <button class="category-btn" data-category="data">Data</button>
+          <button class="category-btn" data-category="network">Network</button>
+        </div>
         <ul class="script-list" id="script-list">
-          <li class="active" data-script="main.py">main.py</li>
-          <li data-script="data_processor.py">data_processor.py</li>
-          <li data-script="network_scan.py">network_scan.py</li>
-          <li data-script="image_analyzer.py">image_analyzer.py</li>
-          <li data-script="crypto.py">crypto.py</li>
+          <li class="active" data-script="main.py" data-category="all"><span class="script-icon">📄</span>main.py</li>
+          <li data-script="data_processor.py" data-category="data"><span class="script-icon">📊</span>data_processor.py
+          </li>
+          <li data-script="network_scan.py" data-category="network"><span class="script-icon">🔍</span>network_scan.py
+          </li>
+          <li data-script="image_analyzer.py" data-category="ai"><span class="script-icon">🖼️</span>image_analyzer.py
+          </li>
+          <li data-script="samurai_ai.py" data-category="ai"><span class="script-icon">🤖</span>samurai_ai.py</li>
+          <li data-script="assistant_ai.py" data-category="ai"><span class="script-icon">🤖</span>assistant_ai.py</li>
         </ul>
+
+        <div class="section-title">AI ASSISTANTS</div>
+        <div class="ai-assistants">
+          <div class="ai-assistant" id="samurai-ai">
+            <div class="ai-icon">侍</div>
+            <div class="ai-info">
+              <div class="ai-name">Samurai</div>
+              <div class="ai-status offline">Offline</div>
+            </div>
+            <button class="ai-toggle">Start</button>
+          </div>
+          <div class="ai-assistant" id="assistant-ai">
+            <div class="ai-icon">👤</div>
+            <div class="ai-info">
+              <div class="ai-name">Assistant</div>
+              <div class="ai-status offline">Offline</div>
+            </div>
+            <button class="ai-toggle">Start</button>
+          </div>
+        </div>
+
         <div class="section-title">TOOLS</div>
         <ul class="tool-list">
-          <li>File Manager</li>
-          <li>Network Monitor</li>
-          <li>System Stats</li>
-          <li>Settings</li>
+          <li><span class="tool-icon">📁</span>File Manager</li>
+          <li><span class="tool-icon">📡</span>Network Monitor</li>
+          <li><span class="tool-icon">📈</span>System Stats</li>
+          <li><span class="tool-icon">⚙️</span>Settings</li>
         </ul>
       </div>
 
       <div class="console-area">
         <div class="tabs">
-          <div class="tab active">Terminal</div>
-          <div class="tab">Editor</div>
-          <div class="tab">Output</div>
+          <div class="tab active" data-tab="terminal">Terminal</div>
+          <div class="tab" data-tab="editor">Editor</div>
+          <div class="tab" data-tab="output">Output</div>
+          <div class="tab" data-tab="ai-chat">AI Chat</div>
         </div>
-        <div class="console-window">
-          <div class="console-header">
-            <span>ONI TERMINAL v6.6.6 <span class="pentagram">⛧</span> DEMONIC INTERFACE</span>
-            <div class="controls">
-              <button class="minimize">_</button>
-              <button class="maximize">□</button>
-              <button class="close">×</button>
+
+        <div class="tab-content active" id="terminal-tab">
+          <div class="console-window">
+            <div class="console-header">
+              <span>SAMURAI TERMINAL v1.0.0 - COMMAND CENTER</span>
+              <div class="controls">
+                <button class="minimize">_</button>
+                <button class="maximize">□</button>
+                <button class="close">×</button>
+              </div>
+            </div>
+            <div class="console-output" id="console-output">
+              <div class="line">SAMURAI CONSOLE v1.0.0 [Advanced Script Management System]</div>
+              <div class="line">Copyright (c) 2025 Samurai Systems</div>
+              <div class="line">Type 'help' for available commands</div>
+              <div class="line success">System initialized. Ready for input.</div>
+            </div>
+            <div class="console-input-area">
+              <span class="prompt">samurai@system:~$</span>
+              <input type="text" id="console-input" class="console-input" autofocus placeholder="Enter command...">
             </div>
           </div>
-          <div class="console-output" id="console-output">
-            <div class="line">ONI CONSOLE v6.6.6 [Demonic Script Management System]</div>
-            <div class="line">Copyright (c) 2025 ONI Demonic Systems</div>
-            <div class="line">Type 'help' for available commands or 'summon' for rituals</div>
-            <div class="line success">System initialized. The darkness awaits your command.</div>
-          </div>
-          <div class="console-input-area">
-            <span class="prompt">oni@abyss:~$</span>
-            <input type="text" id="console-input" class="console-input" autofocus placeholder="Enter command...">
+        </div>
+
+        <div class="tab-content" id="editor-tab">
+          <div class="editor-window">
+            <div class="editor-header">
+              <span id="editor-filename">No file selected</span>
+              <div class="editor-actions">
+                <button id="save-file" class="editor-btn">Save</button>
+                <button id="run-file" class="editor-btn">Run</button>
+              </div>
+            </div>
+            <div class="editor-content">
+              <textarea id="code-editor" placeholder="Select a file to edit..."></textarea>
+            </div>
           </div>
         </div>
+
+        <div class="tab-content" id="output-tab">
+          <div class="output-window">
+            <div class="output-header">
+              <span>Script Output</span>
+              <button id="clear-output" class="output-btn">Clear</button>
+            </div>
+            <div class="output-content" id="script-output">
+              <div class="output-line">No script has been executed yet.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="ai-chat-tab">
+          <div class="chat-window">
+            <div class="chat-header">
+              <div class="chat-assistant-selector">
+                <button class="chat-assistant-btn active" data-assistant="samurai">Samurai</button>
+                <button class="chat-assistant-btn" data-assistant="assistant">Assistant</button>
+              </div>
+              <button id="clear-chat" class="chat-btn">Clear</button>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+              <div class="chat-message system">
+                <div class="message-content">Select an AI assistant and start a conversation.</div>
+              </div>
+            </div>
+            <div class="chat-input-area">
+              <input type="text" id="chat-input" class="chat-input" placeholder="Type your message...">
+              <button id="send-message" class="send-btn">Send</button>
+            </div>
+          </div>
+        </div>
+
         <div class="script-info">
           <div class="current-script">
             <div class="section-title">CURRENT SCRIPT</div>
@@ -99,9 +195,47 @@
       </div>
       <div class="status-message" id="status-message">All systems operational</div>
     </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="new-script-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Create New Script</h2>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="new-script-name">Script Name:</label>
+            <input type="text" id="new-script-name" placeholder="e.g., my_script.py">
+          </div>
+          <div class="form-group">
+            <label for="new-script-category">Category:</label>
+            <select id="new-script-category">
+              <option value="all">General</option>
+              <option value="ai">AI</option>
+              <option value="data">Data</option>
+              <option value="network">Network</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="new-script-template">Template:</label>
+            <select id="new-script-template">
+              <option value="blank">Blank File</option>
+              <option value="basic">Basic Script</option>
+              <option value="ai">AI Script</option>
+              <option value="data">Data Processing</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="create-script-btn" class="primary-btn">Create</button>
+          <button class="cancel-btn modal-close">Cancel</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
 </body>
-</html>
 
+</html>
